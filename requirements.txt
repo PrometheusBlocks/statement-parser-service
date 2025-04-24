@@ -2,4 +2,4 @@
 pydantic>=2.6
 python-dateutil
 openai>=1.13
-git+https://github.com/PrometheusBlocks/data-models.git@main#egg=data-models
+git+https://github.com/PrometheusBlocks/data-models.git@v0.1.0#egg=data-models
