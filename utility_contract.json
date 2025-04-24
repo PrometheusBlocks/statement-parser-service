@@ -1,11 +1,61 @@
 {
-    "name": "REPLACE_ME",
-    "version": "0.0.0",
+    "name": "statement-parser-service",
+    "version": "0.1.0",
     "language": "python",
-    "description": "Replace with one-sentence purpose.",
+    "description": "Finance-specific block that turns page text from any bank/brokerage statement into validated objects from the data-models package.",
     "size_budget": 200000,
-    "entrypoints": [],
-    "deps": [],
-    "tests": []
+    "entrypoints": [
+        {
+            "name": "parse_statement",
+            "description": "Parse bank statement pages into accounts and transactions using LLM adapter",
+            "parameters_schema": {
+                "$schema": "http://json-schema.org/draft-07/schema#",
+                "title": "ParsedInput",
+                "type": "object",
+                "properties": {
+                    "document_id": { "type": "string" },
+                    "pages": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "number": { "type": "integer" },
+                                "text": { "type": "string" }
+                            },
+                            "required": ["number", "text"],
+                            "additionalProperties": false
+                        }
+                    }
+                },
+                "required": ["document_id", "pages"],
+                "additionalProperties": false
+            },
+            "return_schema": {
+                "$schema": "http://json-schema.org/draft-07/schema#",
+                "title": "ParsedStatement",
+                "type": "object",
+                "properties": {
+                    "document_id": { "type": "string" },
+                    "accounts": {
+                        "type": "array",
+                        "items": { "type": "object" }
+                    },
+                    "transactions": {
+                        "type": "array",
+                        "items": { "type": "object" }
+                    }
+                },
+                "required": ["document_id", "accounts", "transactions"],
+                "additionalProperties": false
+            }
+        }
+    ],
+    "deps": [
+        { "package": "pydantic", "version": ">=2.6" },
+        { "package": "python-dateutil", "version": "*" },
+        { "package": "openai", "version": ">=1.13" },
+        { "package": "data-models", "version": ">=0.1.0" }
+    ],
+    "tests": ["tests/test_parser.py"]
   }
   

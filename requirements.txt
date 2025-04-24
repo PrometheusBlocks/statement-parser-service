@@ -1,1 +1,5 @@
 # add deps here
+pydantic>=2.6
+python-dateutil
+openai>=1.13
+data-models>=0.1.0
