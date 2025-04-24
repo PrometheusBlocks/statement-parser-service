@@ -3,7 +3,7 @@ import sys
 import pytest
 
 # Ensure project root is on sys.path for module imports
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 from llm.adapter import StubAdapter, get_adapter  # noqa: E402
 
